@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Admin Portal Login - CodeLearn</title>
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@100..700,0..1,-50..200,24&display=swap" rel="stylesheet">
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#0d59f2",
+                },
+                fontFamily: {
+                    "display": ["Inter"]
+                },
+            },
+        },
+    }
+  </script>
+  
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  </style>
+
+</head>
+<body class="bg-slate-950 font-display text-white min-h-screen flex flex-col">
+
+  <main class="flex-1 flex flex-col items-center justify-center px-6 py-8">
+      <div class="w-full max-w-sm">
+          <div class="flex justify-center mb-8">
+              <div class="bg-indigo-500/10 p-4 rounded-xl border border-indigo-500/20">
+                  <span class="material-symbols-outlined text-indigo-400 text-5xl">shield_person</span>
+              </div>
+          </div>
+          
+          <div class="text-center mb-10">
+              <h1 class="text-slate-100 text-3xl font-bold leading-tight mb-2">Admin Portal</h1>
+              <p class="text-slate-400 text-sm font-normal">Internal access only.</p>
+          </div>
+          
+          <form id="adminFrm" class="space-y-5">
+              <div id="errorBox" class="hidden bg-red-500/10 border border-red-500/30 text-red-400 p-3 rounded-lg text-sm font-bold text-center"></div>
+              
+              <div class="flex flex-col gap-2">
+                  <label class="text-slate-300 text-sm font-semibold">Username</label>
+                  <div class="relative">
+                      <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">person</span>
+                      <input id="lUser" class="w-full pl-12 pr-4 py-4 rounded-lg bg-slate-900 border border-slate-800 text-slate-100 focus:ring-0 focus:border-indigo-400 transition-colors outline-none" placeholder="Admin username" type="text" required/>
+                  </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                  <label class="text-slate-300 text-sm font-semibold">Password</label>
+                  <div class="relative">
+                      <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">lock</span>
+                      <input id="lPass" class="w-full pl-12 pr-4 py-4 rounded-lg bg-slate-900 border border-slate-800 text-slate-100 focus:ring-0 focus:border-indigo-400 transition-colors outline-none" placeholder="••••••••" type="password" required/>
+                  </div>
+              </div>
+              <button id="lBtn" class="w-full bg-indigo-600 border border-indigo-500 shadow-lg shadow-indigo-500/20 text-white font-bold py-4 rounded-lg hover:bg-indigo-500 transition-colors mt-4" type="submit">
+                  Authorize
+              </button>
+          </form>
+          
+          <p class="text-center mt-8">
+              <a href="index.html" class="text-slate-500 text-sm font-bold hover:text-white transition-colors flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-sm">arrow_back</span> Return to App
+              </a>
+          </p>
+      </div>
+  </main>
+
+  <script src="api.js"></script>
+  <script>
+    document.getElementById('adminFrm').onsubmit = async (e) => {
+      e.preventDefault();
+      
+      const errorBox = document.getElementById('errorBox');
+      const btn = document.getElementById('lBtn');
+      
+      errorBox.classList.add('hidden');
+      btn.textContent = 'Verifying...';
+      btn.classList.add('opacity-50', 'pointer-events-none');
+      
+      try {
+        const res = await Api.login({ 
+             username: document.getElementById('lUser').value, 
+             password: document.getElementById('lPass').value 
+        });
+        
+        if (!res.user.is_superuser) {
+            await Api.logout();
+            errorBox.textContent = 'Access Denied: You do not have administrator privileges.';
+            errorBox.classList.remove('hidden');
+            btn.textContent = 'Authorize';
+            btn.classList.remove('opacity-50', 'pointer-events-none');
+            return;
+        }
+        
+        window.location.href = 'app.html#/manage';
+        
+      } catch (err) {
+        errorBox.textContent = err.data?.error || 'Authentication failed. Invalid username or password.';
+        errorBox.classList.remove('hidden');
+        btn.textContent = 'Authorize';
+        btn.classList.remove('opacity-50', 'pointer-events-none');
+      }
+    };
+  </script>
+</body>
+</html>

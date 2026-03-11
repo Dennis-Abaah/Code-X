@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CodeLearn - Master Coding</title>
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@100..700,0..1,-50..200,24&display=swap" rel="stylesheet">
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#0d59f2",
+                    "background-light": "#f5f6f8",
+                    "background-dark": "#101622",
+                },
+                fontFamily: {
+                    "display": ["Inter"]
+                },
+            },
+        },
+    }
+  </script>
+  
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  </style>
+
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    })();
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+
+  <nav class="flex items-center bg-white dark:bg-slate-900 px-6 py-4 justify-between border-b border-slate-200 dark:border-slate-800">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+      <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">CodeLearn</h2>
+    </div>
+    <div class="flex items-center gap-6">
+       <a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="app.html#/login">Log In</a>
+       <button onclick="window.location.href='app.html#/register'" class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors hidden sm:block">Get Started</button>
+    </div>
+  </nav>
+
+  <main class="flex-1 overflow-y-auto w-full">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col gap-8 px-6 py-12 @[864px]:flex-row @[864px]:items-center @[864px]:py-24">
+        <div class="flex flex-col gap-8 flex-1">
+          <div class="flex flex-col gap-4">
+            <span class="text-primary font-bold tracking-wider text-xs uppercase">Level up your career</span>
+            <h1 class="text-slate-900 dark:text-white text-5xl font-black leading-[1.1] tracking-tight sm:text-6xl">
+                Master Coding <br/><span class="text-primary">At Your Own Pace</span>
+            </h1>
+            <p class="text-slate-600 dark:text-slate-400 text-lg font-normal leading-relaxed max-w-xl">
+                Join over 1 million students learning Python, JavaScript, HTML, and C++ through interactive, bite-sized lessons designed for absolute beginners.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button onclick="window.location.href='app.html#/register'" class="flex items-center justify-center rounded-lg h-14 px-8 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-colors">
+                Start Learning for Free
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 w-full hidden sm:block">
+          <div class="relative rounded-xl overflow-hidden aspect-square border border-slate-200 dark:border-slate-700 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD9Rcuhh8WzTJFsZIXYndyxCzvCJZA6ke4o0cDyEsSI4Z3zzWOXUmJ6BmZqtKvK64NkLPe5lSlknnMh-eIZrWWFauPBvUCefpRyT_HfQCjJDpWMC5odJ_fFK4KvivpED5O9BJ6I0_hkzkt-tT7TNF3a7h5CdlmnL-xZh0XlxMt6lh6HfkKRlUw9eAjTxofydkUJjsO6XkxkSB-Ddt8Mx_IMRQIWRb43xV-vanVcfW7y8y4DkNza0L_tIdIOgR_x2U6LoZUzhZ8zoQc');">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+</body>
+</html>
