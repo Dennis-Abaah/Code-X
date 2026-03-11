@@ -120,6 +120,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # ──── ImgBB API Key ────
 IMGBB_API_KEY = os.getenv("IMGBB_API_KEY")
 
