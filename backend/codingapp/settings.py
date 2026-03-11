@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 # ──── Middleware ────
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',           # CORS — must be high
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -101,6 +102,11 @@ USE_TZ = True
 
 # ──── Static Files ────
 STATIC_URL = 'static/'
+# This tells Django where to "copy" all static files for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Add this to help WhiteNoise (the tool we will use) find the files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ──── DRF Settings ────
 REST_FRAMEWORK = {
