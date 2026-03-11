@@ -114,19 +114,23 @@ REST_FRAMEWORK = {
 
 # ──── CORS Settings ────
 # Allow the frontend (served on different port) to talk to the API
-CORS_ALLOW_ALL_ORIGINS = True    # Fine for local dev
+CORS_ALLOWED_ORIGINS = [
+    'https://codex-gh.vercel.app',
+]  
 CORS_ALLOW_CREDENTIALS = True    # So session cookies are forwarded
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://codex-gh.vercel.app',
     'http://localhost:5500',
     'http://127.0.0.1:5500',
     'http://localhost:5501',
     'http://127.0.0.1:5501',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'http://localhost:8080',
-    'https://code-x-jhmx.onrender.com',
+    'http://localhost:8080',   
 ]
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # ──── ImgBB API Key ────
