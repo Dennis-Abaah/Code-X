@@ -118,6 +118,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://localhost:8080',
+    'https://code-x-jhmx.onrender.com',
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
