@@ -2,7 +2,7 @@
  * api.js — HTTP client for the Django REST API.
  * Handles CSRF tokens, session cookies, and JSON responses.
  */
-const API_BASE = 'http://127.0.0.1:8000/api';
+const API_BASE = 'https://code-x-jhmx.onrender.com/api';
 let _csrfToken = null;
 
 const Api = {
